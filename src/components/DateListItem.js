@@ -1,7 +1,11 @@
 import React from 'react';
 
-const DateListItem = props => {
-  return <li>{props.date.name}: {props.date.date}</li>
+const DateListItem = ({ date, onDateSelect }) => {
+  return (
+    <li onClick={() => onDateSelect(date.date)} >
+      {date.name}: {date.date}
+    </li>
+  );
 }
 
 export default DateListItem;

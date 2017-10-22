@@ -7,9 +7,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // deadline: 'December 25, 2017',
-      deadline: this.calculateOneYear(),
-      inputDeadline: '',
+      deadline: '',
+      inputDate: '',
       dateList: [
         { name: 'Christmas', date: 'December 25, 2017' },
         { name: 'Halloween', date: 'October 31, 2017' },
@@ -20,16 +19,22 @@ export default class App extends Component {
     }
   }
 
+  componentWillMount() {
+    this.setState({
+      deadline: this.calculateOneYear()
+    });
+  }
+
   calculateOneYear() {
     let year = new Date();
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
-                  'September', 'October', 'November', 'December']
+      'September', 'October', 'November', 'December']
     return `${months[year.getMonth() + 1]} ${year.getDate()}, ${year.getFullYear() + 1}`
   }
 
-  changeDeadline() {
+  onDateInput() {
     this.setState({
-      deadline: this.state.inputDeadline
+      deadline: this.state.inputDate
     });
   }
 
@@ -39,15 +44,18 @@ export default class App extends Component {
         <h3>Date Countdown to {this.state.deadline}</h3>
         <Clock deadline={this.state.deadline} />
         <div>
-          <input 
+          <input
             placeholder='input a date'
-            onChange={e => this.setState({ inputDeadline: e.target.value })} 
+            onChange={e => this.setState({ inputDate: e.target.value })}
           />
-          <button onClick={() => this.changeDeadline()}>
+          <button onClick={() => this.onDateInput()}>
             Submit
           </button>
         </div>
-        <DateList dateList={this.state.dateList} />
+        <DateList
+          onDateSelect={deadline => this.setState({deadline})}
+          dateList={this.state.dateList}
+        />
       </div>
     )
   }

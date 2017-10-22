@@ -5,7 +5,7 @@ import './App.css';
 
 const DateList = props => {
   const dateItems = props.dateList.map(date => {
-    return <DateListItem date={date} key={date.name} />
+    return <DateListItem onDateSelect={props.onDateSelect} date={date} key={date.name} />
   });
 
   return (
