@@ -7,7 +7,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deadline: 'December 25, 2017',
+      // deadline: 'December 25, 2017',
+      deadline: this.calculateOneYear(),
       inputDeadline: '',
       dateList: [
         { name: 'Christmas', date: 'December 25, 2017' },
@@ -17,6 +18,13 @@ export default class App extends Component {
         { name: 'Independence Day', date: 'July 4, 2018' }
       ]
     }
+  }
+
+  calculateOneYear() {
+    let year = new Date();
+    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                  'September', 'October', 'November', 'December']
+    return `${months[year.getMonth() + 1]} ${year.getDate()}, ${year.getFullYear() + 1}`
   }
 
   changeDeadline() {
