@@ -1,13 +1,16 @@
 body {
   font-family: Tacoma, sans-serif;
-  letter-spacing: .3em;
   background-color: #c4c4c4;
 }
 
 .App {
   text-align: center;
-  width: 600px;
+  width: 400px;
   margin: 15% auto;
+}
+
+input {
+  margin: 15px 5px;
 }
 
 li {

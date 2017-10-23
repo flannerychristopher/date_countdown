@@ -1,6 +1,5 @@
 import React from 'react';
 import DateListItem from './components/DateListItem';
-import _ from 'lodash';
 import './App.css';
 
 const DateList = props => {
