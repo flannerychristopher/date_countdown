@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Clock from './Clock';
-import DateList from './DateList';
+import Clock from './components/Clock';
+import DateList from './components/DateList';
+import TextInput from './components/TextInput';
 import YearSelect from './components/YearSelect';
 import './App.css';
 
@@ -51,23 +52,29 @@ export default class App extends Component {
     return (
       <div className="App">
         <h1>Countdown</h1>
-        <h3>{this.state.deadline}, 
+        <h2>{this.state.deadline}, </h2>
           <YearSelect
             value={this.state.year}
             onYearChange={this.onYearChange.bind(this)}
           />
-        </h3>
         <Clock deadline={this.state.deadline} year={this.state.year} />
-        <div>
+
+        {/* <div>
+          <p>type a month and date or choose one below:</p>
           <input
-            placeholder='type a month and date'
+            placeholder='month and date'
             onChange={e => this.setState({ inputDate: e.target.value })}
           />
-
           <button onClick={() => this.onDateInput()}>
             Submit
           </button>
-        </div>
+        </div> */}
+
+        <TextInput 
+          onInputChange={event => this.setState({ inputDate: event.target.value })}
+          onDateInput={this.onDateInput.bind(this)}
+        />
+
         <DateList
           onDateSelect={deadline => this.setState({ deadline })}
           dateList={this.state.dateList}

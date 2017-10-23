@@ -1,6 +1,6 @@
 import React from 'react';
-import DateListItem from './components/DateListItem';
-import './App.css';
+import DateListItem from './DateListItem';
+import '../App.css';
 
 const DateList = props => {
   const dateItems = props.dateList.map(date => {
