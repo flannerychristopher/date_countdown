@@ -13,14 +13,14 @@ export default class Clock extends Component {
   }
 
   componentWillMount() {
-    this.getTimeUntil(`${this.props.deadline} ${this.props.year}`);
+    this.updateCount(this.props.formatted_date);
   }
 
   componentDidMount() {
-    setInterval(() => this.getTimeUntil(`${this.props.deadline} ${this.props.year}`), 1000);
+    setInterval(() => this.updateCount(this.props.formatted_date), 1000);
   }
 
-  getTimeUntil(input) {
+  updateCount(input) {
     const time = Date.parse(input) - Date.parse(new Date());
     const days = Math.floor(time / (1000*60*60*24));
     const hours = Math.floor(time / (1000*60*60) % 24);

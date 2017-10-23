@@ -9,7 +9,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deadline: '',
+      selectedDate: '',
       year: '2018',
       inputDate: '',
       dateList: [
@@ -24,59 +24,47 @@ export default class App extends Component {
 
   componentWillMount() {
     this.setState({
-      deadline: this.calculateOneYear()
+      selectedDate: this.getMonthAndDate()
     });
   }
 
-  calculateOneYear() {
+  getMonthAndDate() {
     let year = new Date();
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
       'September', 'October', 'November', 'December']
-    return `${months[year.getMonth() + 1]} ${year.getDate()}`
+    return `${months[year.getMonth()]} ${year.getDate()}`
   }
 
   onDateInput() {
     this.setState({
-      deadline: this.state.inputDate
+      selectedDate: this.state.inputDate
     });
   }
 
-  onYearChange(event) {
-    console.log(event.target.value)
-    this.setState({
-      year: event.target.value
-    });
+  onYearChange(year) {
+    this.setState({ year });
   }
 
   render() {
     return (
       <div className="App">
         <h1>Countdown</h1>
-        <h2>{this.state.deadline}, </h2>
-          <YearSelect
-            value={this.state.year}
-            onYearChange={this.onYearChange.bind(this)}
-          />
-        <Clock deadline={this.state.deadline} year={this.state.year} />
+        <h2>{this.state.selectedDate}, </h2>
 
-        {/* <div>
-          <p>type a month and date or choose one below:</p>
-          <input
-            placeholder='month and date'
-            onChange={e => this.setState({ inputDate: e.target.value })}
-          />
-          <button onClick={() => this.onDateInput()}>
-            Submit
-          </button>
-        </div> */}
+        <YearSelect
+          value={this.state.year}
+          onYearChange={this.onYearChange.bind(this)}
+        />
 
-        <TextInput 
+        <Clock formatted_date={this.state.selectedDate+' '+this.state.year} />
+
+        <TextInput
           onInputChange={event => this.setState({ inputDate: event.target.value })}
           onDateInput={this.onDateInput.bind(this)}
         />
 
         <DateList
-          onDateSelect={deadline => this.setState({ deadline })}
+          onDateSelect={selectedDate => this.setState({ selectedDate })}
           dateList={this.state.dateList}
         />
       </div>

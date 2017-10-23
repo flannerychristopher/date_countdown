@@ -2,9 +2,9 @@ import React from 'react';
 import DateListItem from './DateListItem';
 import '../App.css';
 
-const DateList = props => {
-  const dateItems = props.dateList.map(date => {
-    return <DateListItem onDateSelect={props.onDateSelect} date={date} key={date.name} />
+const DateList = ({ dateList, onDateSelect }) => {
+  const dateItems = dateList.map(date => {
+    return <DateListItem onDateSelect={onDateSelect} date={date} key={date.name} />
   });
 
   return (
@@ -13,5 +13,6 @@ const DateList = props => {
     </div>
   );
 }
+
 
 export default DateList;
